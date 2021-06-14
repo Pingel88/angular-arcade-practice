@@ -32,7 +32,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/app/invaders-game/js/ship.js"
+            ]
           },
           "configurations": {
             "production": {
