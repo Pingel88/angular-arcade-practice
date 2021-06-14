@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Ship from './js/ship';
+import Flower from './js/flower';
 import * as p5 from 'p5';
 // declare const Ship:any;
 
@@ -19,16 +20,24 @@ export class InvadersGameComponent implements OnInit {
 
   ngOnInit() {
     let ship: Ship;
+    let flowers: Flower[] = [];
     new p5(p => {
       p.setup = () => {
         p.createCanvas(600, 400);
-        ship = new Ship(p)
+        ship = new Ship(p);
+        console.log(flowers);
+        for (let i = 0; i < 6; i++) {
+          flowers[i] = new Flower(p, i*80+80, 60);
+        }
       }
 
       p.draw = () => {
         p.background(51);
         // p.rect(10,10,50,50)
         ship.show();
+        for (let i = 0; i < flowers.length; i++) {
+          flowers[i].show();
+        }
       }
 
       p.keyPressed = () => {
