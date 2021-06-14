@@ -34,7 +34,8 @@
             ],
             "scripts": [
               "src/app/invaders-game/js/ship.js",
-              "src/app/invaders-game/js/flower.js"
+              "src/app/invaders-game/js/flower.js",
+              "src/app/invaders-game/js/drop.js"
             ]
           },
           "configurations": {
