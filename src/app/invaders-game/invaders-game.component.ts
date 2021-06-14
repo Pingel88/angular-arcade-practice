@@ -44,8 +44,15 @@ export class InvadersGameComponent implements OnInit {
           drops[i].move();
           for (let j = 0; j < flowers.length; j++) {
             if (drops[i].hits(flowers[j])) {
+              flowers[j].grow();
+              drops[i].evaporate();
               console.log('watering!');
             }
+          }
+        }
+        for (let i = drops.length-1; i >= 0; i--) {
+          if (drops[i].toDelete) {
+            drops.splice(i, 1);
           }
         }
       }
