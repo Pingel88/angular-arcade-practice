@@ -26,6 +26,7 @@ export class BrickBreakerGameComponent implements OnInit {
         player.show();
         player.move();
         ball.show();
+        ball.move();
       }
     })
   }
