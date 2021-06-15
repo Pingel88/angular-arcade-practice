@@ -27,6 +27,29 @@ export class BrickBreakerGameComponent implements OnInit {
         player.move();
         ball.show();
         ball.move();
+
+        // checks for ball encounters with wall
+        if (ball.x < 0 + ball.radius || ball.x > p.width-ball.radius) {
+          ball.ricochetX();
+        }
+        if (ball.y < 0 + ball.radius || ball.y > p.height-ball.radius) {
+          ball.ricochetY();
+        }
+
+        // checks for ball encounters with player
+        if (ball.y+ball.radius > player.y-player.height/2 && ball.y-ball.radius < player.y+player.height/2 && ball.x > player.x - player.width/2 && ball.x < player.x + player.width/2) {
+          ball.ricochetY();
+        }
+        if (ball.x+ball.radius > player.x-player.width/2 && ball.x-ball.radius < player.x+player.width/2 && ball.y > player.y - player.height/2 && ball.y < player.y + player.height/2) {
+          ball.ricochetX();
+          // prevent ball from getting stuck inside player paddle
+          if (ball.x < player.x) {
+            ball.x = player.x-player.width/2-ball.radius;
+          } else {
+            ball.x = player.x+player.width/2+ball.radius;
+          }
+        }
+
       }
     })
   }
