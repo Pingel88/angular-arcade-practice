@@ -12,11 +12,6 @@ import * as p5 from 'p5';
 export class InvadersGameComponent implements OnInit {
   canvasWidth = 600;
   canvasHeight = 400;
-  // sw = 2;
-  // c = [];
-  // strokeColor = 0;
-
-  constructor() {}
 
   ngOnInit() {
     let ship: Ship;
