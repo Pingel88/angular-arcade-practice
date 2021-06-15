@@ -17,10 +17,12 @@ export class BrickBreakerGameComponent implements OnInit {
       p.setup = () => {
         const canvas = p.createCanvas(1000, 900);
         canvas.parent('game-holder');
+        // increased framerate to speed up game and decrease clipping bugs
+        p.frameRate(144);
         player = new Player(p);
         ball = new Ball(p);
       }
-
+      
       p.draw = () => {
         p.background(51);
         player.show();
