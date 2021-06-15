@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as p5 from 'p5';
 
 @Component({
   selector: 'p5-brick-breaker-game',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrickBreakerGameComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
+    new p5(p => {
+      p.setup = () => {
+        const canvas = p.createCanvas(1000, 900);
+        canvas.parent('game-holder');
+      }
+
+      p.draw = () => {
+        p.background(51);
+      }
+    })
   }
 
 }

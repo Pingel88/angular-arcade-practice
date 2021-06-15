@@ -13,7 +13,7 @@ export class InvadersGameComponent implements OnInit {
   canvasWidth = 600;
   canvasHeight = 400;
 
-  ngOnInit() {
+  ngOnInit(): void {
     let ship: Ship;
     let flowers: Flower[] = [];
     let drops: Drop[] = [];
