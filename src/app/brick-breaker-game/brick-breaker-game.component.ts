@@ -27,6 +27,7 @@ export class BrickBreakerGameComponent implements OnInit {
         player.move();
         ball.show();
         ball.move();
+        ball.moveAtStart(player.x, player.y, player.height);
 
         // side wall encounter check
         if (ball.x < 0 + ball.radius || ball.x > p.width-ball.radius) {
@@ -39,14 +40,17 @@ export class BrickBreakerGameComponent implements OnInit {
           }
         }
         // top wall encounter check
-        if (ball.y < 0 + ball.radius || ball.y > p.height-ball.radius) {
+        if (ball.y < 0 + ball.radius) {
           ball.ricochetY();
           // prevent ball from being forced outside of the canvas
           if (ball.y < 0 + ball.radius) {
             ball.y = 0+ball.radius;
           }
         }
-
+        // bottom wall encounter check and resets game
+        if (ball.y > p.height-ball.radius) {
+          ball.isGamePlaying = false;
+        }
         // checks for ball encounters with player
         if (ball.y + ball.radius > player.y - player.height / 2 && ball.y - ball.radius < player.y + player.height / 2 && ball.x > player.x - player.width / 2 && ball.x < player.x + player.width / 2) {
           ball.ricochetY();
@@ -60,7 +64,10 @@ export class BrickBreakerGameComponent implements OnInit {
             ball.x = player.x+player.width/2+ball.radius;
           }
         }
+      }
 
+      p.mouseClicked = () => {
+        ball.isGamePlaying = true;
       }
     })
   }
