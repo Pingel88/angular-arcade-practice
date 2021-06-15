@@ -28,19 +28,30 @@ export class BrickBreakerGameComponent implements OnInit {
         ball.show();
         ball.move();
 
-        // checks for ball encounters with wall
+        // side wall encounter check
         if (ball.x < 0 + ball.radius || ball.x > p.width-ball.radius) {
           ball.ricochetX();
+          // prevent ball from being forced outside of the canvas
+          if (ball.x > p.width - ball.radius) {
+            ball.x = p.width - ball.radius;
+          } else if (ball.x < 0 + ball.radius) {
+            ball.x = 0 + ball.radius;
+          }
         }
+        // top wall encounter check
         if (ball.y < 0 + ball.radius || ball.y > p.height-ball.radius) {
           ball.ricochetY();
+          // prevent ball from being forced outside of the canvas
+          if (ball.y < 0 + ball.radius) {
+            ball.y = 0+ball.radius;
+          }
         }
 
         // checks for ball encounters with player
-        if (ball.y+ball.radius > player.y-player.height/2 && ball.y-ball.radius < player.y+player.height/2 && ball.x > player.x - player.width/2 && ball.x < player.x + player.width/2) {
+        if (ball.y + ball.radius > player.y - player.height / 2 && ball.y - ball.radius < player.y + player.height / 2 && ball.x > player.x - player.width / 2 && ball.x < player.x + player.width / 2) {
           ball.ricochetY();
         }
-        if (ball.x+ball.radius > player.x-player.width/2 && ball.x-ball.radius < player.x+player.width/2 && ball.y > player.y - player.height/2 && ball.y < player.y + player.height/2) {
+        if (ball.x + ball.radius > player.x - player.width / 2 && ball.x-ball.radius < player.x + player.width / 2 && ball.y > player.y - player.height / 2 && ball.y < player.y + player.height / 2) {
           ball.ricochetX();
           // prevent ball from getting stuck inside player paddle
           if (ball.x < player.x) {

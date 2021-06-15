@@ -1,6 +1,6 @@
 export default function Ball(p) {
-  this.x = p.width/2;
-  this.y = p.height/2;
+  this.x = p.width / 2;
+  this.y = p.height / 2;
   this.radius = 10;
   this.speed = 3;
   this.velocity = {
@@ -16,15 +16,6 @@ export default function Ball(p) {
   this.move = () => {
     this.x += this.velocity.x * this.speed;
     this.y += this.velocity.y * this.speed;
-  }
-  
-  this.wallCheck = () => {
-    if (this.x < 0 + this.radius || this.x > p.width-this.radius) {
-      this.ricochetX();
-    }
-    if (this.y < 0 + this.radius || this.y > p.height-this.radius) {
-      this.ricochetY();
-    }
   }
 
   this.ricochetX = () => {
