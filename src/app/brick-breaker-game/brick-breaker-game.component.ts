@@ -21,6 +21,7 @@ export class BrickBreakerGameComponent implements OnInit {
       p.draw = () => {
         p.background(51);
         player.show();
+        player.move();
       }
     })
   }
