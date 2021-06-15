@@ -1,3 +1,10 @@
-<div>
-  <p5-invaders-game></p5-invaders-game>
+<nav class='navbar navbar-expand navbar-light bg-light'>
+  <a class='navbar-brand'>{{ pageTitle }}</a>
+  <ul class='nav nav-pills'>
+    <li><a class='nav-link' routerLink='/invaders'>Flower Invaders</a></li>
+    <li><a class='nav-link' routerLink='/brick-breaker'>Brick Breaker</a></li>
+  </ul>
+</nav>
+<div class='container'>
+  <router-outlet></router-outlet>
 </div>

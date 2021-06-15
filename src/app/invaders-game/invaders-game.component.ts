@@ -19,7 +19,9 @@ export class InvadersGameComponent implements OnInit {
     let drops: Drop[] = [];
     new p5(p => {
       p.setup = () => {
-        p.createCanvas(600, 400);
+        const canvas = p.createCanvas(600, 400);
+        // need to place it inside a div so it doesn't create a copy every time
+        canvas.parent('game-holder');
         ship = new Ship(p);
         // drop = new Drop(p, p.width/2, p.height/2);
         for (let i = 0; i < 6; i++) {
