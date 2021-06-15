@@ -13,7 +13,7 @@ export default function Ball(p) {
   this.moveAtStart = (playerX, playerY, playerHeight) => {
     if (!this.isGamePlaying) {
       this.x = playerX;
-      this.y = playerY - playerHeight / 2  - this.radius;
+      this.y = playerY - playerHeight / 2 - this.radius;
     }
   }
   

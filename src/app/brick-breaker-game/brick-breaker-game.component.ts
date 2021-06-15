@@ -69,7 +69,6 @@ export class BrickBreakerGameComponent implements OnInit {
       p.mouseClicked = () => {
         ball.updateVelocity();
         ball.isGamePlaying = true;
-        console.log(ball.velocity)
       }
     })
   }
