@@ -4,6 +4,6 @@ export default function Player(p) {
   this.show = function() {
     p.fill(255);
     p.rectMode(p.CENTER);
-    p.rect(this.x, p.height-100, 60, 20);
+    p.rect(this.x, p.height-60, 120, 10);
   }
 }
