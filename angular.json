@@ -37,7 +37,8 @@
               "src/app/invaders-game/js/flower.js",
               "src/app/invaders-game/js/drop.js",
               "src/app/brick-breaker-game/js/player.js",
-              "src/app/brick-breaker-game/js/ball.js"
+              "src/app/brick-breaker-game/js/ball.js",
+              "src/app/brick-breaker-game/js/brick.js"
             ]
           },
           "configurations": {

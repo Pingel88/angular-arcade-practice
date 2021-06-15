@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Player from './js/player';
 import Ball from './js/ball';
+import Brick from './js/brick';
 import * as p5 from 'p5';
 
 @Component({
@@ -13,6 +14,12 @@ export class BrickBreakerGameComponent implements OnInit {
   ngOnInit(): void {
     let player: Player;
     let ball: Ball;
+    let bricks: Brick[] = [];
+    let rows = 3;
+    let bricksInRow = 12;
+    let brickWidth = 80;
+    let brickHeight = 30;
+
     new p5(p => {
       p.setup = () => {
         const canvas = p.createCanvas(1000, 900);
@@ -21,6 +28,16 @@ export class BrickBreakerGameComponent implements OnInit {
         p.frameRate(144);
         player = new Player(p);
         ball = new Ball(p);
+        // top of bricks
+        let brickYCounter = 60;
+        for (let i = 1; i <= rows; i++) {
+          let brickXCounter = p.width / 2 - ( bricksInRow / 2 * brickWidth ) + brickWidth / 2;
+          for (let j = 1; j <= bricksInRow; j++) {
+            bricks.push(new Brick(p, brickXCounter, brickYCounter, brickWidth, brickHeight));
+            brickXCounter += brickWidth;
+          }
+          brickYCounter += brickHeight;
+        }
       }
       
       p.draw = () => {
@@ -30,6 +47,9 @@ export class BrickBreakerGameComponent implements OnInit {
         ball.show();
         ball.move();
         ball.moveAtStart(player.x, player.y, player.height);
+        for (let i = 0; i < bricks.length; i++){
+          bricks[i].show();
+        }
 
         // side wall encounter check
         if (ball.x < 0 + ball.radius || ball.x > p.width-ball.radius) {
