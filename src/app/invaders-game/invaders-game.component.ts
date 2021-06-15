@@ -34,22 +34,36 @@ export class InvadersGameComponent implements OnInit {
 
       p.draw = () => {
         p.background(51);
-        // p.rect(10,10,50,50)
+        // show player
         ship.show();
+        ship.move();
+        // animate flowers
+        let edge = false;
         for (let i = 0; i < flowers.length; i++) {
           flowers[i].show();
+          flowers[i].move();
+          if (flowers[i].x + flowers[i].r > p.width || flowers[i].x - flowers[i].r < 0) {
+            edge = true;
+          }
         }
+        if (edge) {
+          for (let i = 0; i < flowers.length; i++) {
+            flowers[i].shiftDown();
+          }
+        }
+        // animate drops
         for (let i = 0; i < drops.length; i++) {
           drops[i].show();
           drops[i].move();
+          // check for intersection with flowers
           for (let j = 0; j < flowers.length; j++) {
             if (drops[i].hits(flowers[j])) {
               flowers[j].grow();
               drops[i].evaporate();
-              console.log('watering!');
             }
           }
         }
+        // remove drops when intersecting with flowers
         for (let i = drops.length-1; i >= 0; i--) {
           if (drops[i].toDelete) {
             drops.splice(i, 1);
@@ -57,11 +71,17 @@ export class InvadersGameComponent implements OnInit {
         }
       }
 
+      p.keyReleased = () => {
+        if (p.key != ' ') {
+          ship.setDir(0);
+        }
+      }
+
       p.keyPressed = () => {
         if (p.keyCode === p.RIGHT_ARROW) {
-          ship.move(1);
+          ship.setDir(1);
         } else if (p.keyCode === p.LEFT_ARROW) {
-          ship.move(-1);
+          ship.setDir(-1);
         }
         
         if (p.key === ' ') {

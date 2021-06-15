@@ -3,12 +3,24 @@ export default function Flower(p, x, y) {
   this.y = y;
   this.r = 30;
 
+  this.xdir = 1;
+
   this.grow = function() {
     this.r = this.r + 2;
   }
 
+  this.move = function() {
+    this.x = this.x + this.xdir;
+  }
+
+  this.shiftDown = function() {
+    this.xdir *= -1;
+    this.y += this.r;
+  }
+
   this.show = function() {
-    p.fill(255, 0, 200);
+    p.noStroke();
+    p.fill(255, 0, 200, 150);
     p.ellipse(this.x, this.y, this.r*2, this.r*2);
   }
 }
