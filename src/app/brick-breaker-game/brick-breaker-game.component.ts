@@ -15,10 +15,10 @@ export class BrickBreakerGameComponent implements OnInit {
     let player: Player;
     let ball: Ball;
     let bricks: Brick[] = [];
-    let rows = 15;
-    let bricksInRow = 4;
-    let brickWidth = 200;
-    let brickHeight = 40;
+    let rows = 5;
+    let bricksInRow = 10;
+    let brickWidth = 80;
+    let brickHeight = 30;
     // number of pixels inside a brick to check which wall the ball hit
     let brickWallCheck = 5;
 
