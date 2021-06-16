@@ -15,10 +15,12 @@ export class BrickBreakerGameComponent implements OnInit {
     let player: Player;
     let ball: Ball;
     let bricks: Brick[] = [];
-    let rows = 3;
-    let bricksInRow = 12;
-    let brickWidth = 80;
-    let brickHeight = 30;
+    let rows = 15;
+    let bricksInRow = 4;
+    let brickWidth = 200;
+    let brickHeight = 40;
+    // number of pixels inside a brick to check which wall the ball hit
+    let brickWallCheck = 5;
 
     new p5(p => {
       p.setup = () => {
@@ -81,11 +83,39 @@ export class BrickBreakerGameComponent implements OnInit {
           ball.ricochetX();
           // prevent ball from getting stuck inside player paddle
           if (ball.x < player.x) {
-            ball.x = player.x-player.width/2-ball.radius;
+            ball.x = player.x - player.width / 2 - ball.radius;
           } else {
-            ball.x = player.x+player.width/2+ball.radius;
+            ball.x = player.x + player.width /2 + ball.radius;
           }
         }
+        // checks for ball encountering brick
+        for (let i = bricks.length - 1; i >= 0; i--) {
+          if (
+            ball.y - ball.radius < bricks[i].y + bricks[i].height / 2 && 
+            ball.y + ball.radius > bricks[i].y - bricks[i].height / 2 &&
+            ball.x + ball.radius > bricks[i].x - bricks[i].width / 2 && 
+            ball.x - ball.radius < bricks[i].x + bricks[i].width / 2) {
+              // check edge ball hit
+              if (
+                // if ball entered top of brick
+                (ball.y + ball.radius < bricks[i].y - bricks[i].height / 2 + brickWallCheck &&
+                ball.y + ball.radius > bricks[i].y - bricks[i].height / 2 - brickWallCheck) ||
+                // or if ball entered bottom of brick
+                (ball.y - ball.radius > bricks[i].y + bricks[i].height / 2 - brickWallCheck &&
+                ball.y - ball.radius < bricks[i].y + bricks[i].height / 2 + brickWallCheck)) {
+                  ball.ricochetY();
+              } else if (
+                // if ball entered left of brick
+                (ball.x + ball.radius < bricks[i].x - bricks[i].width / 2 + brickWallCheck &&
+                ball.x + ball.radius > bricks[i].x - bricks[i].width / 2 - brickWallCheck) ||
+                // or if ball entered right of brick
+                (ball.x - ball.radius > bricks[i].x + bricks[i].width / 2 - brickWallCheck &&
+                ball.x - ball.radius < bricks[i].x + bricks[i].width / 2 + brickWallCheck)) {
+                  ball.ricochetX();
+              }
+              bricks.splice(i, 1);
+          }
+        } 
       }
 
       p.mouseClicked = () => {
