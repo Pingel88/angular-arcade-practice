@@ -24,6 +24,8 @@ export class BrickBreakerGameComponent implements OnInit {
 
     new p5(p => {
       p.setup = () => {
+        bricksInRow = p.random(3, 12);
+        rows = p.random(3, 20);
         const canvas = p.createCanvas(1000, 900);
         canvas.parent('game-holder');
         // increased framerate to speed up game and decrease clipping bugs

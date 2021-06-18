@@ -4,10 +4,14 @@ export default function Player(p) {
   this.yDir = 0;
   this.isMoveRight = false;
   this.isMoveLeft = false;
+  this.diameter = 20;
+  this.radius = this.diameter / 2;
+  this.color = "white";
 
   this.show = function() {
-    p.fill(255)
-    p.ellipse(this.x, this.y, 20, 20)
+    p.fill(this.color);
+    p.noStroke();
+    p.ellipse(this.x, this.y, this.diameter, this.diameter)
   }
 
   this.setXDir = function(dir) {
